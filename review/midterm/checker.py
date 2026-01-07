@@ -23,7 +23,7 @@ def run_checker(user_code, exercise_num):
             with contextlib.redirect_stdout(io.StringIO()):
                 exec(user_code, {}, test_env)
             expected = f"{math.pi * (t_rad**2):.2f}"
-            if test_env.get('result') == expected: return f"✅ Correct! Works for radius {t_rad}."
+            if test_env.get('result') == expected: return f"✅ Correct output: {result}! Works for radius {t_rad}."
             return f"❌ Incorrect. For radius {t_rad}, expected '{expected}', but got '{test_env.get('result')}'."
 
         elif exercise_num == 2: # List Insert/Append (Easy)
