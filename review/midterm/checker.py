@@ -24,7 +24,7 @@ def run_checker(user_code, exercise_num):
                 exec(user_code, {}, test_env)
             expected = f"{math.pi * (t_rad**2):.2f}"
             result=test_env.get('result')
-            if test_env.get('result') == expected: return f"✅ Correct output: {result}! for radius {t_rad}."
+            if test_env.get('result') == expected: return f"✅ Correct output: {result}! for input {t_rad}."
             return f"❌ Incorrect. For radius {t_rad}, expected '{expected}', but got '{test_env.get('result')}'."
 
         elif exercise_num == 2: # List Insert/Append (Easy)
