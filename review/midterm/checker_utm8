@@ -13,28 +13,34 @@ def run_checker(user_code, exercise_num):
         exec(user_code, {}, local_env)
         
         if exercise_num == 1:
-            # Step 1: Check if the variable 'result' exists at all
+            # 1. Check if the variable 'result' exists
             if 'result' not in local_env:
-                return "❌ Error: Please save your final formatted string in a variable named 'result'."
+                return "❌ Error: Please save your final result in a variable named 'result'."
             
-            # Step 2: Define a hidden test
-            # We will re-run their code but change the 'radius' variable automatically
-            test_radius = 5.0
-            expected_val = f"{math.pi * (test_radius**2):.2f}"
+            # 2. Define the single hidden test case
+            t_rad = 2.2
+            import io
+            import contextlib
             
             try:
-                # We inject a new radius into the same environment and re-run their code
-                test_env = {'radius': test_radius, 'math': math}
-                exec(user_code, {}, test_env)
+                # Create a clean environment for the test
+                test_env = {'math': math, 'radius': t_rad}
                 
-                student_result = test_env.get('result')
+                # Run the student's code SILENTLY for the test case
+                with contextlib.redirect_stdout(io.StringIO()):
+                    exec(user_code, {}, test_env)
                 
-                if student_result == expected_val:
-                    return f"✅ Correct! Your code works for radius {test_radius} and other values too."
+                # Calculate expected result for 2.2
+                # Area = pi * 2.2^2 ≈ 15.2053... -> "15.21"
+                expected_area = math.pi * (t_rad**2)
+                expected_str = f"{expected_area:.2f}"
+                
+                # Verify student's result
+                student_val = test_env.get('result')
+                if student_val == expected_str:
+                    return f"✅ Correct! Your logic works (tested with radius {t_rad})."
                 else:
-                    return f"❌ Failed. For radius {test_radius}, expected '{expected_val}', but got '{student_result}'."
-            except:
-                return "❌ Your code crashed when I tried to change the radius value. Check your logic!"
+                    return f"❌ Failed. For radius {t_rad}, expected '{expected_str}', but your code produced '{student_val}'."
         elif exercise_num == 2:
             # List manipulation (Add/Remove)
             s = local_env.get('score')
