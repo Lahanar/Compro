@@ -13,13 +13,11 @@ def run_checker(user_code, exercise_num):
         
         # --- EASY QUESTIONS (Topics 1 & 2) ---
         if exercise_num == 1:
-            print("num = 1")
-        '''    # --- PART 1: Check the student's current output ---
+            # --- PART 1: Check the student's current output ---
             if 'result' not in local_env:
                 return "❌ Error: Please save your final result in a variable named 'result'."
             
             # --- PART 2: The Logic Validation (The "Hidden" Test) ---
-            # We define a few different test cases to be sure
             test_cases = [5, 12.5, 2.2] 
             
             for t_rad in test_cases:
@@ -42,22 +40,25 @@ def run_checker(user_code, exercise_num):
                     return f"⚠️ Your code crashed during hidden testing. Error: {e}"
 
             return "✅ Excellent! Your code works for the current value and all hidden test cases."
-        '''
+
         elif exercise_num == 2:
             # List manipulation (Add/Remove)
             s = local_env.get('score')
-            if s and s[0] == 100 and s[-1] == 999: return "✅ Correct! 100 inserted at start and 999 appended."
+            if s and s[0] == 100 and s[-1] == 999: 
+                return "✅ Correct! 100 inserted at start and 999 appended."
             return "❌ Hint: Use score.insert(0, 100) and score.append(999)"
 
         elif exercise_num == 3:
             # Dictionary Basics
             std = local_env.get('student')
-            if isinstance(std, dict) and std.get('age') == 20: return "✅ Correct! Dictionary created."
+            if isinstance(std, dict) and std.get('age') == 20: 
+                return "✅ Correct! Dictionary created."
             return "❌ Hint: student = {'name': 'John', 'age': 20}"
 
         elif exercise_num == 4:
             # Type Conversion
-            if local_env.get('x_int') == 10 and isinstance(local_env.get('x_int'), int): return "✅ Correct!"
+            if local_env.get('x_int') == 10 and isinstance(local_env.get('x_int'), int): 
+                return "✅ Correct!"
             return "❌ Hint: Use int() to convert the string."
 
         # --- MEDIUM QUESTIONS (Topics 3 & 4) ---
@@ -65,40 +66,47 @@ def run_checker(user_code, exercise_num):
             # If-Else Logic
             status = local_env.get('status')
             val = local_env.get('n')
-            if (val % 2 == 0 and status == "Even") or (val % 2 != 0 and status == "Odd"): return "✅ Correct!"
+            if (val % 2 == 0 and status == "Even") or (val % 2 != 0 and status == "Odd"): 
+                return "✅ Correct!"
             return "❌ Logic mismatch for Even/Odd."
 
         elif exercise_num == 6:
             # Membership (in operator)
             exists = local_env.get('exists')
-            if exists is True: return "✅ Correct! 99 is in the list."
+            if exists is True: 
+                return "✅ Correct! 99 is in the list."
             return "❌ Hint: exists = 99 in score"
 
         elif exercise_num == 7:
             # While Loop with break
-            if local_env.get('count') == 5: return "✅ Correct! Loop stopped at 5."
+            if local_env.get('count') == 5: 
+                return "✅ Correct! Loop stopped at 5."
             return "❌ Hint: Use if i == 5: break"
 
         elif exercise_num == 8:
             # Collection Sort
             s = local_env.get('score')
-            if s == sorted(score, reverse=True): return "✅ Correct! List sorted descending."
+            if s == sorted(score, reverse=True): 
+                return "✅ Correct! List sorted descending."
             return "❌ Hint: score.sort(reverse=True)"
 
         # --- HARD QUESTIONS (Topics 5 & 6) ---
         elif exercise_num == 9:
             # For loop + Range (Sum of Evens)
-            if local_env.get('total_even') == 510: return "✅ Correct! Sum of even numbers is 510."
+            if local_env.get('total_even') == 510: 
+                return "✅ Correct! Sum of even numbers is 510."
             return "❌ Hint: Use if s % 2 == 0: total_even += s"
 
         elif exercise_num == 10:
             # Nested Loop (Pattern)
-            if local_env.get('stars') == 15: return "✅ Correct! Nested logic found."
+            if local_env.get('stars') == 15: 
+                return "✅ Correct! Nested logic found."
             return "❌ Ensure you used a nested loop for the pattern."
 
         elif exercise_num == 11:
             # Iterating Dict of Lists (BMI)
-            if local_env.get('bmi_list') and abs(local_env['bmi_list'][0] - 24.2) < 0.5: return "✅ Correct!"
+            if local_env.get('bmi_list') and abs(local_env['bmi_list'][0] - 24.2) < 0.5: 
+                return "✅ Correct!"
             return "❌ Calculation error in BMI loop."
 
         elif exercise_num == 12:
@@ -108,6 +116,7 @@ def run_checker(user_code, exercise_num):
             return "❌ Hint: if s == 3: continue"
 
         return "❌ Logic incomplete. Check variable names."
+
     except Exception as e:
         return f"⚠️ Error: {e}"
 
@@ -115,9 +124,11 @@ def create_ui(exercise_num, default_code):
     code_input = widgets.Textarea(value=default_code, layout={'height': '160px', 'width': '95%'})
     btn = widgets.Button(description="Check Code", button_style='primary')
     out = widgets.Output()
+    
     def on_click(b):
         with out:
             clear_output()
             print(run_checker(code_input.value, exercise_num))
+            
     btn.on_click(on_click)
     display(code_input, btn, out)
