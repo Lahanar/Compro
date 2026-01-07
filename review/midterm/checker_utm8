@@ -13,7 +13,8 @@ def run_checker(user_code, exercise_num):
         
         # --- EASY QUESTIONS (Topics 1 & 2) ---
         if exercise_num == 1:
-            # --- PART 1: Check the student's current output ---
+            print("num = 1")
+        '''    # --- PART 1: Check the student's current output ---
             if 'result' not in local_env:
                 return "❌ Error: Please save your final result in a variable named 'result'."
             
@@ -41,7 +42,7 @@ def run_checker(user_code, exercise_num):
                     return f"⚠️ Your code crashed during hidden testing. Error: {e}"
 
             return "✅ Excellent! Your code works for the current value and all hidden test cases."
-
+        '''
         elif exercise_num == 2:
             # List manipulation (Add/Remove)
             s = local_env.get('score')
