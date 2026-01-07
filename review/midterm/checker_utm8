@@ -1,46 +1,33 @@
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 import math
+import io
+import contextlib
 
 def run_checker(user_code, exercise_num):
-    # Setup standard data for collection questions
     score = [65, 12, 88, 45, 76, 3, 94, 51, 29, 60, 82, 18, 41, 99, 34, 55, 7, 85, 62, 20, 48, 73, 15, 90, 57]
     
     try:
-        # local_env provides the starting variables for students
+        # First Run: Execute normally in the local environment
         local_env = {'score': score.copy(), 'math': math}
         exec(user_code, {}, local_env)
         
-        # --- EASY QUESTIONS (Topics 1 & 2) ---
         if exercise_num == 1:
-            # --- PART 1: Check the student's current output ---
             if 'result' not in local_env:
                 return "❌ Error: Please save your final result in a variable named 'result'."
             
-            # --- PART 2: The Logic Validation (The "Hidden" Test) ---
             test_cases = [5, 12.5, 2.2] 
-            
             for t_rad in test_cases:
-                try:
-                    # Create a fresh environment for each test case
+                # Use redirect_stdout to "hide" student prints during these 3 tests
+                with contextlib.redirect_stdout(io.StringIO()):
                     test_env = {'math': math, 'radius': t_rad}
-                    
-                    # Run the student's code string against this new radius
                     exec(user_code, {}, test_env)
                     
-                    # Calculate what the answer SHOULD be
-                    expected_area = math.pi * (t_rad**2)
-                    expected_str = f"{expected_area:.2f}"
-                    
-                    # Compare with student's variable
+                    expected_str = f"{math.pi * (t_rad**2):.2f}"
                     if test_env.get('result') != expected_str:
-                        return f"❌ Failed. Your logic doesn't work when radius is {t_rad}. Expected '{expected_str}'."
-                
-                except Exception as e:
-                    return f"⚠️ Your code crashed during hidden testing. Error: {e}"
-
-            return "✅ Excellent! Your code works for the current value and all hidden test cases."
-
+                        return f"❌ Failed. Your logic doesn't work when radius is {test_radius}. Expected '{expected_str}'."
+            
+            return "✅ Excellent! Your code works for all test cases."
         elif exercise_num == 2:
             # List manipulation (Add/Remove)
             s = local_env.get('score')
@@ -128,9 +115,8 @@ def create_ui(exercise_num, default_code):
     def on_click(b):
         with out:
             clear_output()
-            # 1. Run the student's code openly first so they see their own output
             print("--- Your Code Output ---")
-            # We use the same run_checker logic but ensure it prints results below
+            # We run it once here so the student sees their print() only ONCE
             result = run_checker(code_input.value, exercise_num)
             
             print("\n--- Checker Result ---")
