@@ -13,10 +13,34 @@ def run_checker(user_code, exercise_num):
         
         # --- EASY QUESTIONS (Topics 1 & 2) ---
         if exercise_num == 1:
-            # Area of circle (Math module + f-string)
-            ans = local_env.get('result')
-            if ans and "314.16" in ans: return "✅ Correct! Math.pi and f-string formatting used."
-            return "❌ Hint: Use f'{area:.2f}' and math.pi"
+            # --- PART 1: Check the student's current output ---
+            if 'result' not in local_env:
+                return "❌ Error: Please save your final result in a variable named 'result'."
+            
+            # --- PART 2: The Logic Validation (The "Hidden" Test) ---
+            # We define a few different test cases to be sure
+            test_cases = [5, 12.5, 2.2] 
+            
+            for t_rad in test_cases:
+                try:
+                    # Create a fresh environment for each test case
+                    test_env = {'math': math, 'radius': t_rad}
+                    
+                    # Run the student's code string against this new radius
+                    exec(user_code, {}, test_env)
+                    
+                    # Calculate what the answer SHOULD be
+                    expected_area = math.pi * (t_rad**2)
+                    expected_str = f"{expected_area:.2f}"
+                    
+                    # Compare with student's variable
+                    if test_env.get('result') != expected_str:
+                        return f"❌ Failed. Your logic doesn't work when radius is {t_rad}. Expected '{expected_str}'."
+                
+                except Exception as e:
+                    return f"⚠️ Your code crashed during hidden testing. Error: {e}"
+
+            return "✅ Excellent! Your code works for the current value and all hidden test cases."
 
         elif exercise_num == 2:
             # List manipulation (Add/Remove)
