@@ -128,7 +128,13 @@ def create_ui(exercise_num, default_code):
     def on_click(b):
         with out:
             clear_output()
-            print(run_checker(code_input.value, exercise_num))
+            # 1. Run the student's code openly first so they see their own output
+            print("--- Your Code Output ---")
+            # We use the same run_checker logic but ensure it prints results below
+            result = run_checker(code_input.value, exercise_num)
+            
+            print("\n--- Checker Result ---")
+            print(result)
             
     btn.on_click(on_click)
     display(code_input, btn, out)
