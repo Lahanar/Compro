@@ -13,21 +13,28 @@ def run_checker(user_code, exercise_num):
         exec(user_code, {}, local_env)
         
         if exercise_num == 1:
+            # Step 1: Check if the variable 'result' exists at all
             if 'result' not in local_env:
-                return "❌ Error: Please save your final result in a variable named 'result'."
+                return "❌ Error: Please save your final formatted string in a variable named 'result'."
             
-            test_cases = [5, 12.5, 2.2] 
-            for t_rad in test_cases:
-                # Use redirect_stdout to "hide" student prints during these 3 tests
-                with contextlib.redirect_stdout(io.StringIO()):
-                    test_env = {'math': math, 'radius': t_rad}
-                    exec(user_code, {}, test_env)
-                    
-                    expected_str = f"{math.pi * (t_rad**2):.2f}"
-                    if test_env.get('result') != expected_str:
-                        return f"❌ Failed. Your logic doesn't work when radius is {test_radius}. Expected '{expected_str}'."
+            # Step 2: Define a hidden test
+            # We will re-run their code but change the 'radius' variable automatically
+            test_radius = 5.0
+            expected_val = f"{math.pi * (test_radius**2):.2f}"
             
-            return "✅ Excellent! Your code works for all test cases."
+            try:
+                # We inject a new radius into the same environment and re-run their code
+                test_env = {'radius': test_radius, 'math': math}
+                exec(user_code, {}, test_env)
+                
+                student_result = test_env.get('result')
+                
+                if student_result == expected_val:
+                    return f"✅ Correct! Your code works for radius {test_radius} and other values too."
+                else:
+                    return f"❌ Failed. For radius {test_radius}, expected '{expected_val}', but got '{student_result}'."
+            except:
+                return "❌ Your code crashed when I tried to change the radius value. Check your logic!"
         elif exercise_num == 2:
             # List manipulation (Add/Remove)
             s = local_env.get('score')
