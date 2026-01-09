@@ -9,7 +9,7 @@ def run_coderunner():
     # UI Components
     instruction = widgets.HTML("<b>Task:</b> Use <code>math.pi</code> and the variable <code>radius</code>. Store the result in a variable named <code>result</code> formatted to 2 decimal places.")
     code_input = widgets.Textarea(
-        value='# Write your code here\nimport math\narea = \nresult = f""',
+        value='# Write your code here\nimport math\nradius = \narea = \nresult = f""',
         layout={'height': '150px', 'width': '90%'}
     )
     check_btn = widgets.Button(description='Run & Check', button_style='primary')
