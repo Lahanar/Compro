@@ -11,7 +11,7 @@ def run_grader():
             "expected": lambda d: f"{math.pi * d['radius']**2:.2f}"
         },
         "2. List Ops": {
-            "hint": "score.insert(0, 5) then score.append(30).\nStore in 'result'.", 
+            "hint": "print to see the original value in variable 'score'. \nThen, insert value 5 to the beginning of 'score'.\n Next, add value 30 at the end.\nStore in 'result'.", 
             "tests": [{"score": [10, 20]}], "target": "result", 
             "expected": lambda d: [5, 10, 20, 30]
         },
