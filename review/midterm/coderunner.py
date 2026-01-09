@@ -5,66 +5,66 @@ import math
 def run_grader():
     # Problem Definitions
     problems = {
-    "1. Circle Area": {
-        "hint": "Use math.pi and radius.\nStore in 'result' (2 dec).", 
-        "tests": [{"radius": 2}], "target": "result", 
-        "expected": lambda d: f"{math.pi * d['radius']**2:.2f}"
-    },
-    "2. List Ops": {
-        "hint": "score.insert(0, 5) then score.append(30).\nStore in 'result'.", 
-        "tests": [{"score": [10, 20]}], "target": "result", 
-        "expected": lambda d: [5, 10, 20, 30]
-    },
-    "3. Dictionary": {
-        "hint": "Create dict 'student'.\nUse keys 'name' and 'age'.", 
-        "tests": [{}], "target": "student", 
-        "expected": lambda d: {"name": "John", "age": 20}
-    },
-    "4. Conversion": {
-        "hint": "Convert s='10' to integer.\nStore in variable 'x_int'.", 
-        "tests": [{"s": "10"}], "target": "x_int", 
-        "expected": lambda d: 10
-    },
-    "5. Even/Odd": {
-        "hint": "If num is even, result='Even'.\nElse result='Odd'.", 
-        "tests": [{"num": 4}, {"num": 7}], "target": "result", 
-        "expected": lambda d: "Even" if d['num'] % 2 == 0 else "Odd"
-    },
-    "6. In Operator": {
-        "hint": "Check if 99 is in list 'score'.\nStore boolean in 'found'.", 
-        "tests": [{"score": [1, 99, 3]}], "target": "found", 
-        "expected": lambda d: 99 in d['score']
-    },
-    "7. While Break": {
-        "hint": "Loop i from 0, break when i == 5.\nStore i in 'result'.", 
-        "tests": [{}], "target": "result", 
-        "expected": lambda d: 5
-    },
-    "8. Sort List": {
-        "hint": "Sort 'score' descending.\nStore in 'result'.", 
-        "tests": [{"score": [1, 5, 2]}], "target": "result", 
-        "expected": lambda d: [5, 2, 1]
-    },
-    "9. Sum Evens": {
-        "hint": "Sum even numbers in 'nums'.\nStore in 'total'.", 
-        "tests": [{"nums": [1, 2, 3, 4]}], "target": "total", 
-        "expected": lambda d: 6
-    },
-    "10. Star Triangle": {
-        "hint": "Create 3-line triangle.\nStore in 'stars'.",
-        "tests": [{}], "target": "stars", 
-        "expected": lambda d: "*\n**\n***"
-    },
-    "11. BMI": {
-        "hint": "BMI = w/h^2 from data={'w':70, 'h':1.7}.\nStore in 'bmi' (1 dec).", 
-        "tests": [{"data": {"w": 70, "h": 1.75}}], "target": "bmi", 
-        "expected": lambda d: f"{d['data']['w'] / d['data']['h']**2:.1f}"
-    },
-    "12. Continue": {
-        "hint": "Sum nums [1,2,3], skip 2.\nStore in 'total'.", 
-        "tests": [{"nums": [1, 2, 3]}], "target": "total", 
-        "expected": lambda d: 4
-    }
+        "1. Circle Area": {
+            "hint": "Use math.pi and radius.\nStore in 'result' (2 dec).", 
+            "tests": [{"radius": 2}], "target": "result", 
+            "expected": lambda d: f"{math.pi * d['radius']**2:.2f}"
+        },
+        "2. List Ops": {
+            "hint": "score.insert(0, 5) then score.append(30).\nStore in 'result'.", 
+            "tests": [{"score": [10, 20]}], "target": "result", 
+            "expected": lambda d: [5, 10, 20, 30]
+        },
+        "3. Dictionary": {
+            "hint": "Create dict 'student'.\nUse keys 'name' and 'age'.", 
+            "tests": [{}], "target": "student", 
+            "expected": lambda d: {"name": "John", "age": 20}
+        },
+        "4. Conversion": {
+            "hint": "Convert s='10' to integer.\nStore in variable 'x_int'.", 
+            "tests": [{"s": "10"}], "target": "x_int", 
+            "expected": lambda d: 10
+        },
+        "5. Even/Odd": {
+            "hint": "If num is even, result='Even'.\nElse result='Odd'.", 
+            "tests": [{"num": 4}, {"num": 7}], "target": "result", 
+            "expected": lambda d: "Even" if d['num'] % 2 == 0 else "Odd"
+        },
+        "6. In Operator": {
+            "hint": "Check if 99 is in list 'score'.\nStore boolean in 'found'.", 
+            "tests": [{"score": [1, 99, 3]}], "target": "found", 
+            "expected": lambda d: 99 in d['score']
+        },
+        "7. While Break": {
+            "hint": "Loop i from 0, break when i == 5.\nStore i in 'result'.", 
+            "tests": [{}], "target": "result", 
+            "expected": lambda d: 5
+        },
+        "8. Sort List": {
+            "hint": "Sort 'score' descending.\nStore in 'result'.", 
+            "tests": [{"score": [1, 5, 2]}], "target": "result", 
+            "expected": lambda d: [5, 2, 1]
+        },
+        "9. Sum Evens": {
+            "hint": "Sum even numbers in 'nums'.\nStore in 'total'.", 
+            "tests": [{"nums": [1, 2, 3, 4]}], "target": "total", 
+            "expected": lambda d: 6
+        },
+        "10. Star Triangle": {
+            "hint": "Create 3-line triangle.\nStore in 'stars'.",
+            "tests": [{}], "target": "stars", 
+            "expected": lambda d: "*\n**\n***"
+        },
+        "11. BMI": {
+            "hint": "BMI = w/h^2 from data={'w':70, 'h':1.7}.\nStore in 'bmi' (1 dec).", 
+            "tests": [{"data": {"w": 70, "h": 1.75}}], "target": "bmi", 
+            "expected": lambda d: f"{d['data']['w'] / d['data']['h']**2:.1f}"
+        },
+        "12. Continue": {
+            "hint": "Sum nums [1,2,3], skip 2.\nStore in 'total'.", 
+            "tests": [{"nums": [1, 2, 3]}], "target": "total", 
+            "expected": lambda d: 4
+        }
     } # This closing brace ends the problems dictionary
     
     # UI setup
