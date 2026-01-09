@@ -52,9 +52,21 @@ def run_grader():
     },
     "10. Star Triangle": {
         "hint": "Create 3-line triangle.\nStore in 'stars'.",
+        "tests": [{}], "target": "stars", 
+        "expected": lambda d: "*\n**\n***"
+    },
+    "11. BMI": {
+        "hint": "BMI = w/h^2 from data={'w':70, 'h':1.7}.\nStore in 'bmi' (1 dec).", 
+        "tests": [{"data": {"w": 70, "h": 1.75}}], "target": "bmi", 
+        "expected": lambda d: f"{d['data']['w'] / d['data']['h']**2:.1f}"
+    },
+    "12. Continue": {
+        "hint": "Sum nums [1,2,3], skip 2.\nStore in 'total'.", 
+        "tests": [{"nums": [1, 2, 3]}], "target": "total", 
+        "expected": lambda d: 4
     }
-
-
+    } # This closing brace ends the problems dictionary
+    
     # UI setup
     selector = widgets.Dropdown(options=list(problems.keys()), description='Problem:')
     instruction = widgets.HTML(value=f"<b>Goal:</b> {problems[selector.value]['hint']}")
