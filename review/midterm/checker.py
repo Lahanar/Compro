@@ -92,7 +92,8 @@ def create_ui(exercise_num, default_code):
             clear_output()
             print("--- Code Output ---")
             # This exec is just for the student to see their own print/error
-            try: exec(code_input.value, {'math':math, 'score':[65, 12, 88, 45, 76, 3, 94, 51, 29, 60, 82, 18, 41, 99, 34, 55, 7, 85, 62, 20, 48, 73, 15, 90, 57]}, {})
+            try: 
+                exec(code_input.value, {'math':math, 'score':[65, 12, 88, 45, 76, 3, 94, 51, 29, 60, 82, 18, 41, 99, 34, 55, 7, 85, 62, 20, 48, 73, 15, 90, 57]}, {})
             except Exception as e: print(f"Error: {e}")
             print("\n--- Checker ---")
             print(run_checker(code_input.value, exercise_num))
