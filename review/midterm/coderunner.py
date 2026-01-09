@@ -65,18 +65,21 @@ def run_grader():
             "tests": [{"nums": [1, 2, 3]}], "target": "total", 
             "expected": lambda d: 4
         }
-    } # This closing brace ends the problems dictionary
-    
+    } 
+
     # UI setup
     selector = widgets.Dropdown(options=list(problems.keys()), description='Problem:')
-    instruction = widgets.HTML(value=f"<b>Goal:</b> {problems[selector.value]['hint']}")
+    instruction = widgets.HTML(value=f"<b>Goal:</b><br>{problems[selector.value]['hint'].replace(chr(10), '<br>')}")
     code_input = widgets.Textarea(placeholder='Write code here...', layout={'height': '180px', 'width': '95%'})
     btn = widgets.Button(description='Run & Check', button_style='success')
     out = widgets.Output()
 
     def update_ui(change):
-        instruction.value = f"<b>Goal:</b> {problems[change.new]['hint']}"
+        # Update hint and replace \n with HTML line breaks
+        new_hint = problems[change.new]['hint'].replace(chr(10), "<br>")
+        instruction.value = f"<b>Goal:</b><br>{new_hint}"
         out.clear_output()
+    
     selector.observe(update_ui, names='value')
 
     def check_code(_):
@@ -90,18 +93,4 @@ def run_grader():
                 local_env = {**test, "math": math}
                 try:
                     exec(student_code, {"math": math}, local_env)
-                    actual = local_env.get(p["target"])
-                    expected = p["expected"](test)
-                    
-                    if str(actual) == str(expected):
-                        print(f"✅ Input {test or 'None'} -> Got: {actual} (Pass)")
-                    else:
-                        print(f"❌ Input {test or 'None'} -> Expected: {expected}, Got: {actual}")
-                except Exception as e:
-                    print(f"💥 Error: {e}")
-    
-    btn.on_click(check_code)
-    display(selector, instruction, code_input, btn, out)
-
-if __name__ == "__main__":
-    run_grader()
+                    actual
