@@ -93,4 +93,18 @@ def run_grader():
                 local_env = {**test, "math": math}
                 try:
                     exec(student_code, {"math": math}, local_env)
-                    actual
+                    actual = local_env.get(p["target"])
+                    expected = p["expected"](test)
+                    
+                    if str(actual) == str(expected):
+                        print(f"✅ Input {test or 'None'} -> Got: {actual} (Pass)")
+                    else:
+                        print(f"❌ Input {test or 'None'} -> Expected: {expected}, Got: {actual}")
+                except Exception as e:
+                    print(f"💥 Error: {e}")
+    
+    btn.on_click(check_code)
+    display(selector, instruction, code_input, btn, out)
+
+if __name__ == "__main__":
+    run_grader()
