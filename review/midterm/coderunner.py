@@ -53,6 +53,9 @@ def run_grader():
     "10. Star Triangle": {
         "hint": "Create 3-line triangle.\nStore in 'stars'.",
 
+    }
+    }
+
     # UI setup
     selector = widgets.Dropdown(options=list(problems.keys()), description='Problem:')
     instruction = widgets.HTML(value=f"<b>Goal:</b> {problems[selector.value]['hint']}")
