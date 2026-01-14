@@ -7,7 +7,7 @@ def run_grader():
     problems = {
         "1. Circle Area": {
             "hint": "Use math.pi and radius.\nStore in 'result' (2 dec).", 
-            "tests": [{"radius": 2}], "target": "result", 
+            "tests": [{"radius": 3}], "target": "result", 
             "expected": lambda d: f"{math.pi * d['radius']**2:.2f}"
         },
         "2. List Ops": {
