@@ -1,2 +1,41 @@
-<script src="question.js"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Python Quiz</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Python Quiz</h1>
+
+<div id="quiz-container">
+
+<h2 id="question"></h2>
+
+<div id="choices"></div>
+
+<br>
+
+<button onclick="checkAnswer()">Check Answer</button>
+
+<p id="result"></p>
+
+<button onclick="nextQuestion()">Next Question</button>
+
+</div>
+
+<br>
+
+<button onclick="showScore()">Show Score</button>
+
+<p id="score"></p>
+
+<script src="questions.js"></script>
 <script src="script.js"></script>
+
+</body>
+
+</html>
